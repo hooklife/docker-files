@@ -1,12 +1,3 @@
-FROM golang:1.9-alpine as builder
-
-ADD . /go/src/github.com/evildecay/etcdkeeper
-
-RUN apk add -U git \
-    && cd /go/src/github.com/evildecay/etcdkeeper \
-    && go get github.com/golang/dep/... \
-    && dep ensure -update \
-    && go build -o etcdkeeper.bin src/httpserver/httpserver.go
 
 FROM alpine:3.7
 
@@ -16,9 +7,12 @@ ENV NAME="request"
 
 RUN apk add --no-cache ca-certificates
 
-WORKDIR /etcdkeeper
-COPY --from=builder /go/src/github.com/evildecay/etcdkeeper/etcdkeeper.bin .
-ADD assets assets
+WORKDIR /
+
+
+RUN wget https://github.com/evildecay/etcdkeeper/releases/download/0.6.6/etcdkeeper3-v0.6.6-linux_x86_64.tar.gz \
+    && tar xzvf etcdkeeper3-v0.6.6-linux_x86_64.tar.gz
+
 
 EXPOSE ${PORT}
 
