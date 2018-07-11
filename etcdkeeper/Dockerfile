@@ -16,4 +16,4 @@ RUN wget https://github.com/evildecay/etcdkeeper/releases/download/0.6.6/etcdkee
 
 EXPOSE ${PORT}
 
-ENTRYPOINT ./etcdkeeper/etcdkeeper -h $HOST -p $PORT -n $NAME
+ENTRYPOINT /etcdkeeper/httpserver -h $HOST -p $PORT -n $NAME
