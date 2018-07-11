@@ -11,7 +11,7 @@ WORKDIR /
 
 
 RUN wget https://github.com/evildecay/etcdkeeper/releases/download/0.6.6/etcdkeeper3-v0.6.6-linux_x86_64.tar.gz \
-    && tar xzvf etcdkeeper3-v0.6.6-linux_x86_64.tar.gz
+    && tar xzvf etcdkeeper3-v0.6.6-linux_x86_64.tar.gz && chmod +x /etcdkeeper/httpserver
 
 
 EXPOSE ${PORT}
